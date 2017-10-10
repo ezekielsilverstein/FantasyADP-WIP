@@ -1,0 +1,6 @@
+requests
+beautifulsoup4
+sqlalchemy
+numpy
+psycopg2
+sqlalchemy_utils
