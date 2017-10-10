@@ -11,6 +11,7 @@ class Player(Base):
     team = Column(String)
     posrank_str = Column(String)
     bye = Column(String)
+    adp = Column(Float)
     best = Column(Integer)
     worst = Column(Integer)
     avg = Column(Float)

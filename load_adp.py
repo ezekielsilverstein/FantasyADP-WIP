@@ -9,7 +9,7 @@ def grab_adp_rows():
     Use Beautiful Soup to retrieve the rows of a player's ADP
     :return: rows
     """
-    url = 'https://www.fantasypros.com/nfl/rankings/dynasty-overall.php'
+    url = 'https://www.fantasypros.com/nfl/rankings/ppr-cheatsheets.php'
     response = requests.get(url)
     soup = BeautifulSoup(response.text)
     rows = soup.findAll('tr', attrs={'class': re.compile('mpb-player*')})
@@ -23,7 +23,7 @@ def load_into_adp(rows):
     """
     for row in rows:
         text = row.text
-        data = text.split('\n')[:-2]
+        data = text.split('\n')
         name_team = data[1]
         tmp_name_team_groups = name_team.split(' ')
         name = ' '.join(tmp_name_team_groups[:-2])
@@ -37,12 +37,15 @@ def load_into_adp(rows):
         else:
             position = data[3][:2]
             position_rank = data[3][2:]
+        if data[9] == "":
+            data[9] = 1000
         p = Player(
             rank = data[0],
             name = name,
             team = team,
             posrank_str = data[3],
             bye = data[4],
+            adp = data[9],
             best = data[5],
             worst = data[6],
             avg = data[7],
