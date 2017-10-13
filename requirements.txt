@@ -4,3 +4,4 @@ sqlalchemy
 numpy
 psycopg2
 sqlalchemy_utils
+configparser
